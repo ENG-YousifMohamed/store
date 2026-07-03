@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر إلكترونيات المتكامل</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
+</head>
+<body>
+
+    <header class="main-navbar">
+        <div class="nav-right-side">
+            <a href="#" class="logo">متجر<span class="logo-highlight">تك</span></a>
+            
+            <div class="dropdown-content">
+                    <a href="#" onclick="event.preventDefault(); currentCategory='لاب توب'; filterProducts()"><i data-lucide="laptop"></i> لاب توب</a>
+                    <a href="#" onclick="event.preventDefault(); currentCategory='موبايل'; filterProducts()"><i data-lucide="smartphone"></i> موبايل</a>
+                    <a href="#" onclick="event.preventDefault(); currentCategory='سماعة'; filterProducts()"><i data-lucide="headphones"></i> سماعات</a>
+                    <hr>
+                    <a href="#" onclick="event.preventDefault(); currentCategory='الكل'; filterProducts()"><i data-lucide="layers"></i> عرض الكل</a>
+                </div>
+        </div>
+
+        <div class="nav-center-side">
+            <div class="search-box">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="nav-search-bar" placeholder="ابحث عن منتج، ماركة، أو فئة..." onkeyup="filterProducts()">
+                <button class="clear-btn" onclick="document.getElementById('nav-search-bar').value=''; filterProducts()"><i data-lucide="x"></i></button>
+            </div>
+        </div>
+
+        <div class="nav-left-side">
+            <button class="nav-icon lang-switch" title="English">
+                <i data-lucide="globe"></i> <span>EN</span>
+            </button>
+
+            <button class="nav-icon theme-toggle" onclick="toggleTheme()" title="الوضع الليلي">
+                <i data-lucide="moon"></i>
+            </button>
+
+            <div class="dropdown notif-dropdown">
+                <div class="nav-icon notif-icon" title="الإشعارات">
+                    <i data-lucide="bell"></i>
+                    <span class="pulse-ring"></span>
+                    <span class="badge" id="notif-count">3</span>
+                </div>
+                <div class="dropdown-content" style="min-width: 250px;">
+                    <h4 style="padding: 15px; border-bottom: 1px solid var(--border-color); margin:0;">الإشعارات</h4>
+                    <a href="#" style="font-size: 0.9rem;"><i data-lucide="zap" style="color: #eab308;"></i> عروض الفلاش بدأت!</a>
+                    <a href="#" style="font-size: 0.9rem;"><i data-lucide="package-check" style="color: #10b981;"></i> تم شحن طلبك بنجاح</a>
+                    <a href="#" style="font-size: 0.9rem;"><i data-lucide="percent" style="color: #ef4444;"></i> خصم 10% على اللاب توب</a>
+                </div>
+            </div>
+
+            <div class="nav-icon wishlist-icon" onclick="toggleWishlist()" title="المفضلة">
+                <i data-lucide="heart"></i>
+                <span class="badge" id="wishlist-count">0</span>
+            </div>
+
+            <div class="nav-icon cart-trigger" onclick="toggleCart()" title="السلة">
+                <i data-lucide="shopping-cart"></i>
+                <span class="badge" id="cart-count">0</span>
+            </div>
+
+            <div class="dropdown profile-dropdown">
+                <button class="nav-icon profile-btn">
+                    <img src="https://ui-avatars.com/api/?name=Yousif&background=2563eb&color=fff" alt="Profile" class="profile-avatar">
+                </button>
+                <div class="dropdown-content profile-menu">
+                    <div class="profile-header">
+                        <h4>مرحباً، يوسف</h4>
+                        <p>yousif@example.com</p>
+                    </div>
+                    <hr>
+                    <a href="#"><i data-lucide="user"></i> حسابي</a>
+                    <a href="#"><i data-lucide="package"></i> طلباتي</a>
+                    <a href="#"><i data-lucide="settings"></i> الإعدادات</a>
+                    <hr>
+                    <a href="#" style="color: #ef4444;"><i data-lucide="log-out"></i> تسجيل الخروج</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h2>اكتشف أحدث التقنيات الذكية</h2>
+            <p>خصومات تصل إلى 50% على أفضل الإلكترونيات لهذا الأسبوع. تسوق الآن قبل نفاذ الكمية!</p>
+            <button class="btn-primary" onclick="document.getElementById('products-section').scrollIntoView({behavior: 'smooth'})">تسوق العروض الآن</button>
+        </div>
+    </section>
+
+    <section class="brands-section">
+        <div class="brands-container">
+            <span>Samsung</span>
+            <span>Apple</span>
+            <span>Sony</span>
+            <span>Lenovo</span>
+            <span>HP</span>
+            <span>Asus</span>
+        </div>
+    </section>
+
+    <section class="featured-categories">
+        <h2 class="section-title">تسوق حسب القسم</h2>
+        <div class="categories-grid">
+            <div class="category-card" onclick="currentCategory='الكل'; filterProducts()">
+                <i data-lucide="layers" class="cat-icon"></i>
+                <h3>عرض الكل</h3>
+            </div>
+            <div class="category-card" onclick="currentCategory='لاب توب'; filterProducts()">
+                <i data-lucide="laptop" class="cat-icon"></i>
+                <h3>لاب توب</h3>
+            </div>
+            <div class="category-card" onclick="currentCategory='موبايل'; filterProducts()">
+                <i data-lucide="smartphone" class="cat-icon"></i>
+                <h3>موبايل</h3>
+            </div>
+            <div class="category-card" onclick="currentCategory='سماعة'; filterProducts()">
+                <i data-lucide="headphones" class="cat-icon"></i>
+                <h3>سماعات</h3>
+            </div>
+            <div class="category-card" onclick="currentCategory='شاشة'; filterProducts()">
+                <i data-lucide="monitor" class="cat-icon"></i>
+                <h3>شاشات</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="flash-sale-section">
+        <div class="flash-header">
+            <h2>⚡ عروض الفلاش (تنتهي قريباً)</h2>
+            <div class="countdown" id="flash-countdown">
+                <div><span id="hours">12</span>ساعة</div>:
+                <div><span id="minutes">45</span>دقيقة</div>:
+                <div><span id="seconds">30</span>ثانية</div>
+            </div>
+        </div>
+    </section>
+
+    <main id="products-section">
+        <h2 class="section-title">أحدث المنتجات</h2>
+        <div id="products-container" class="products-grid"></div>
+    </main>
+
+    <section class="testimonials-section">
+        <h2 class="section-title">آراء عملائنا</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p>"أفضل متجر إلكترونيات اتعاملت معاه، التوصيل سريع جداً والمنتجات أصلية."</p>
+                <h4>- أحمد محمود</h4>
+                <span>⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"أسعار تنافسية جداً مقارنة بالسوق، وخدمة ما بعد البيع ممتازة."</p>
+                <h4>- سارة علي</h4>
+                <span>⭐⭐⭐⭐⭐</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"اشتريت لاب توب جيمنج وكان التغليف أكثر من رائع، شكراً لكم."</p>
+                <h4>- كريم طارق</h4>
+                <span>⭐⭐⭐⭐</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 class="section-title">الأسئلة الشائعة</h2>
+        <div class="faq-container">
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <h3>كم يستغرق شحن الطلب؟ <span>+</span></h3>
+                <p>يستغرق الشحن داخل العاصمة من 1 إلى 2 يوم عمل، وباقي المحافظات من 3 إلى 5 أيام.</p>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <h3>هل المنتجات أصلية وعليها ضمان؟ <span>+</span></h3>
+                <p>نعم، جميع منتجاتنا أصلية 100% وتأتي بضمان الوكيل الرسمي لمدة عام على الأقل.</p>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <h3>هل يمكنني إرجاع المنتج؟ <span>+</span></h3>
+                <p>بالتأكيد، يمكنك إرجاع المنتج خلال 14 يوماً من تاريخ الاستلام بشرط أن يكون في حالته الأصلية.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="newsletter-content">
+            <h2>اشترك في نشرتنا البريدية</h2>
+            <p>احصل على أحدث العروض وكوبونات الخصم مباشرة على بريدك الإلكتروني.</p>
+            <form onsubmit="subscribeNewsletter(event)">
+                <input type="email" placeholder="أدخل بريدك الإلكتروني" required>
+                <button type="submit">اشترك الآن</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3>عن المتجر</h3>
+                <p>الوجهة الأولى لتسوق أحدث الإلكترونيات الذكية بأفضل الأسعار وأعلى جودة في السوق.</p>
+            </div>
+            <div>
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">عروض اليوم</a></li>
+                    <li><a href="#">الأقسام</a></li>
+                    <li><a href="#">تتبع طلبك</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>خدمة العملاء</h3>
+                <ul>
+                    <li><a href="#">تواصل معنا</a></li>
+                    <li><a href="#">سياسة الاسترجاع</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 جميع الحقوق محفوظة - تم التطوير من الصفر</p>
+        </div>
+    </footer>
+<div id="wishlist-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>المفضلة ❤️</h2>
+            <button class="close-btn" onclick="toggleWishlist()"><i data-lucide="x"></i></button>
+        </div>
+        <div id="wishlist-items" class="cart-items">
+            <p style="text-align: center; color: var(--text-muted); margin-top: 20px;">المفضلة فارغة حالياً</p>
+        </div>
+    </div>
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>سلة المشتريات</h2>
+            <button class="close-btn" onclick="toggleCart()"><i data-lucide="x"></i></button>
+        </div>
+        <div id="cart-items" class="cart-items"></div>
+        <div class="cart-footer">
+            <h3>الإجمالي: $<span id="cart-total">0</span></h3>
+            <button class="checkout-btn">إتمام الطلب</button>
+        </div>
+    </div>
+    <div id="cart-overlay" class="cart-overlay" onclick="closeSidebars()"></div>
+
+    <div id="product-modal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal(true)"><i data-lucide="x"></i></span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+    
+</body>
+</html>
