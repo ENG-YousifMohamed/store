@@ -1,0 +1,440 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap');
+
+/* =========================================
+   1. Design System & Variables (نظام التصميم الموحد)
+========================================= */
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --secondary-color: #1e40af;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --header-bg: rgba(255, 255, 255, 0.9);
+    
+    /* أبعاد ثابتة بناءً على طلبك */
+    --header-height: 76px; /* متوسط بين 72 و 80 بكسل */
+    --radius-card: 16px;
+    --radius-btn: 12px;
+    --radius-img: 12px;
+    
+    /* ظلال وحركات ناعمة جداً */
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.04);
+    --shadow-hover: 0 12px 24px rgba(37, 99, 235, 0.1);
+    --transition-main: 300ms cubic-bezier(0.4, 0, 0.2, 1); /* مدة حركة 300ms للوصول لأعلى احترافية */
+}
+
+[data-theme="dark"] {
+    --primary-color: #3b82f6;
+    --primary-hover: #60a5fa;
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --header-bg: rgba(15, 23, 42, 0.9);
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.2);
+    --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================================
+   2. Reset & Typography (الخطوط وإلغاء العشوائية)
+========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Tajawal', sans-serif;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+    font-size: 16px; /* توحيد النصوص العادية 16-18 بكسل */
+    scroll-behavior: smooth;
+    transition: background-color var(--transition-main), color var(--transition-main);
+}
+
+/* التدرج الهرمي الواضح للخطوط */
+h1 { font-size: 3.5rem; font-weight: 800; }
+h2 { font-size: 2.25rem; font-weight: 700; }
+h3 { font-size: 1.35rem; font-weight: 600; }
+p { font-size: 1rem; color: var(--text-muted); }
+
+/* =========================================
+   3. Global Sections (توحيد المسافات بين الأقسام)
+========================================= */
+section, main {
+    padding: 90px 0; /* Padding علوي وسفلي بين 80 و 100 بكسل */
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 24px; /* Margin أسفل العناوين الرئيسية ثابته */
+    font-weight: 800;
+}
+
+/* =========================================
+   4. Buttons (توحيد تصميم الأزرار)
+========================================= */
+button, .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px; /* ارتفاع ثابت لجميع الأزرار */
+    padding: 0 24px; /* Padding أفقي موحد */
+    border-radius: var(--radius-btn);
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-main);
+    gap: 8px;
+}
+
+.btn-primary, .add-btn, .checkout-btn {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+.btn-primary:hover, .add-btn:hover, .checkout-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+/* =========================================
+   5. Advanced Navbar (تصميم الـ Header الاحترافي)
+========================================= */
+.main-navbar {
+    height: var(--header-height);
+    padding: 0 32px; /* Padding أفقي بقيمة 24-32px */
+    background: var(--header-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 100vw;
+}
+
+.nav-right-side, .nav-left-side {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* عناصر القائمة متباعدة بمسافة ثابتة 28-32px */
+}
+
+.nav-center-side {
+    flex: 1 1 auto;
+    min-width: 0; /* تمنع ترحيل وعمل شفت للـ Layout مع الـ F12 */
+    margin: 0 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--text-main);
+    text-decoration: none;
+}
+.logo-highlight { color: var(--primary-color); }
+
+/* شريط البحث */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    padding: 0 15px;
+    width: 100%;
+    max-width: 500px;
+    transition: all var(--transition-main);
+}
+.search-box:focus-within {
+    border-color: var(--primary-color);
+    background: var(--bg-card);
+}
+.search-icon { color: var(--text-muted); width: 20px; }
+.search-box input {
+    flex-grow: 1; border: none; padding: 10px 12px; background: transparent;
+    color: var(--text-main); font-size: 1rem; outline: none;
+}
+.clear-btn { background: none; border: none; color: var(--text-muted); cursor: pointer; display: flex; opacity: 0.5; }
+.clear-btn:hover { opacity: 1; color: #ef4444; }
+
+/* الأيقونات وعناصر التحويم */
+.nav-icon {
+    background: transparent; border: none; cursor: pointer; position: relative;
+    color: var(--text-main); display: flex; align-items: center; justify-content: center;
+    transition: color var(--transition-main);
+}
+.nav-icon svg { width: 22px; height: 22px; } /* حجم ثابت ومحاذاة رأسية دقيقة */
+.nav-icon:hover { color: var(--primary-color); transform: none; }
+
+.badge {
+    position: absolute; top: -6px; right: -8px; background: #ef4444; color: white;
+    font-size: 0.65rem; font-weight: bold; border-radius: 50%; width: 18px; height: 18px;
+    display: flex; justify-content: center; align-items: center; border: 2px solid var(--bg-card);
+}
+.pulse-ring {
+    position: absolute; top: -3px; right: -5px; width: 12px; height: 12px;
+    background: #ef4444; border-radius: 50%; animation: pulse 2s infinite; opacity: 0.5;
+}
+@keyframes pulse { 0% { transform: scale(0.9); opacity: 0.7; } 100% { transform: scale(2.2); opacity: 0; } }
+
+/* القوائم المنسدلة للـ Navbar */
+.dropdown { position: relative; display: inline-block; }
+.dropbtn {
+    background: transparent; color: var(--text-main); font-size: 1rem;
+    font-weight: 500; /* وزن خط 500 أو 600 لعناصر القائمة */
+    height: auto; padding: 5px 0; gap: 6px;
+}
+.dropbtn:hover { color: var(--primary-color); background: transparent; }
+.dropbtn .chevron { width: 16px; transition: transform var(--transition-main); }
+.dropdown:hover .chevron { transform: rotate(180deg); }
+
+.dropdown-content {
+    visibility: hidden; opacity: 0; position: absolute; top: 140%; right: 0;
+    background-color: var(--bg-card); min-width: 220px; box-shadow: var(--shadow-hover);
+    border: 1px solid var(--border-color); border-radius: 12px; z-index: 1000;
+    transform: translateY(10px); transition: all var(--transition-main);
+}
+.dropdown:hover .dropdown-content { visibility: visible; opacity: 1; transform: translateY(0); }
+.dropdown-content a {
+    color: var(--text-main); padding: 12px 20px; text-decoration: none;
+    display: flex; align-items: center; gap: 10px; transition: background 0.2s; font-weight: 500;
+}
+.dropdown-content a:hover { background-color: var(--bg-main); color: var(--primary-color); }
+
+/* حل مشكلة البروفايل والإشعارات المقصوصة يسار الشاشة */
+.profile-dropdown .dropdown-content, .notif-dropdown .dropdown-content {
+    right: auto; left: 0;
+}
+.profile-avatar { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--border-color); }
+.profile-header { padding: 15px 20px; background: var(--bg-main); }
+
+/* =========================================
+   6. Hero Section (تعبئة الشاشة الأولى بالكامل)
+========================================= */
+.hero-section {
+    min-height: 85vh; /* يملأ 85% من مساحة الشاشة الأولى */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600') center/cover;
+    color: white;
+    padding: 0 24px;
+    width: 100%;
+    max-width: 100vw;
+}
+.hero-content { max-width: 800px; }
+.hero-content h2 {
+    font-size: 3.5rem; /* 56px تقريباً على ديسك توب */
+    color: white;
+    margin-bottom: 20px; /* مسافة 20px بين العنوان والوصف */
+    font-weight: 800;
+}
+.hero-content p {
+    font-size: 1.2rem; /* 19px تقريباً */
+    color: #e2e8f0;
+    line-height: 1.7; /* Line height مريح */
+    margin-bottom: 32px; /* مسافة 32px بين الوصف والأزرار */
+}
+
+/* =========================================
+   7. Grids & Cards (توحيد البطاقات والصور)
+========================================= */
+.products-grid, .categories-grid, .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px; /* فجوات مسافات متناسقة موحدة */
+    padding: 0 24px;
+}
+
+.product-card, .category-card, .testimonial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-card); /* حواف دائرية موحدة */
+    padding: 24px; /* Padding داخلي موحد */
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* جميع البطاقات بنفس الارتفاع إجبارياً */
+    box-shadow: var(--shadow-soft);
+    transition: all var(--transition-main);
+}
+
+/* تأثير الـ Hover الاحترافي الموحد */
+.product-card:hover, .category-card:hover {
+    transform: translateY(-5px); /* ترتفع بمقدار 4-6px */
+    box-shadow: var(--shadow-hover); /* يزيد الظل بنعومة */
+    border-color: var(--primary-color);
+}
+
+/* توحيد أبعاد ونسب الصور */
+.image-container {
+    width: 100%;
+    border-radius: var(--radius-img);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.product-card img {
+    width: 100%;
+    aspect-ratio: 4/3; /* نفس نسبة الأبعاد لجميع الصور في الموقع */
+    object-fit: cover; /* منع تمدد أو تشوه الصور */
+    display: block;
+    transition: transform var(--transition-main);
+}
+.product-card:hover img { transform: scale(1.04); }
+
+.product-card h3 { font-size: 1.15rem; margin-bottom: 8px; font-weight: 700; }
+.brand {
+    background-color: var(--bg-main); color: var(--text-muted); padding: 4px 12px;
+    border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px;
+    border: 1px solid var(--border-color); width: fit-content; font-weight: 600;
+}
+.price-action {
+    margin-top: auto; /* دفع العناصر للأسفل لتوحيد خط الأزرار */
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 15px; border-top: 1px solid var(--border-color);
+}
+
+/* =========================================
+   8. Other Sections (البرندات، الفلاش سيل، آراء، الأسئلة)
+========================================= */
+/* Brands */
+.brands-section { background: var(--bg-card); padding: 30px 24px; border-bottom: 1px solid var(--border-color); }
+.brands-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; color: var(--text-muted); font-size: 1.4rem; font-weight: 700; padding: 0 24px; }
+
+/* كروت الأقسام */
+.category-card { text-align: center; cursor: pointer; }
+.category-card .cat-icon { width: 40px; height: 40px; color: var(--primary-color); margin: 0 auto 15px; }
+
+/* Flash Sale */
+.flash-sale-section { padding: 40px 24px; }
+.flash-header { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #ef4444, #b91c1c); padding: 20px 30px; border-radius: 15px; color: white; flex-wrap: wrap; gap: 15px; }
+.countdown { display: flex; gap: 10px; font-size: 1.3rem; font-weight: bold; align-items: center; }
+.countdown div { background: rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 10px; text-align: center; }
+.countdown span { display: block; font-size: 1.8rem; }
+
+/* FAQ Accordion */
+.faq-section { max-width: 800px; }
+.faq-container { padding: 0 24px; }
+.faq-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 15px; padding: 20px; cursor: pointer; }
+.faq-item h3 { display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; }
+.faq-item p { margin-top: 15px; color: var(--text-muted); display: none; font-size: 0.95rem; }
+.faq-item.active p { display: block; animation: fadeIn 250ms ease; }
+.faq-item.active h3 span { transform: rotate(45deg); display: inline-block; color: var(--primary-color); }
+
+/* Newsletter */
+.newsletter-section { background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); max-width: 100vw; color: white; text-align: center; }
+.newsletter-content h2 { color: white; margin-bottom: 10px; }
+.newsletter-content p { color: #e2e8f0; margin-bottom: 25px; }
+.newsletter-section form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.newsletter-section input { padding: 0 20px; height: 48px; border-radius: 30px; border: none; width: 100%; max-width: 350px; font-size: 1rem; outline: none; }
+.newsletter-section button { background: var(--text-main); color: var(--bg-card); border-radius: 30px; }
+
+/* =========================================
+   9. Expanded Footer (زيادة المسافات وتساوي الأعمدة)
+========================================= */
+footer {
+    background: var(--bg-card);
+    padding: 80px 24px 30px; /* زيادة الهوامش والمسافات الداخلية */
+    border-top: 1px solid var(--border-color);
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* جعل الأعمدة متساوية تماماً */
+    gap: 40px;
+    margin-bottom: 50px;
+}
+.footer-grid h3 { margin-bottom: 20px; font-size: 1.15rem; }
+.footer-grid ul { list-style: none; }
+.footer-grid ul li { margin-bottom: 12px; }
+.footer-grid ul a { color: var(--text-muted); text-decoration: none; transition: color var(--transition-main); }
+.footer-grid ul a:hover { color: var(--primary-color); }
+.footer-bottom { text-align: center; padding-top: 24px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.9rem; }
+
+/* =========================================
+   10. Interactive Components Mechanics (إصلاح انهيار السلة والـ Modals)
+========================================= */
+/* السلة الجانبية والمفضلة */
+.cart-sidebar {
+    position: fixed; top: 0; right: -450px; width: 400px; max-width: 100%; height: 100vh;
+    background: var(--bg-card); box-shadow: -5px 0 30px rgba(0,0,0,0.15); z-index: 1005 !important;
+    transition: right var(--transition-main); display: flex; flex-direction: column; border-left: 1px solid var(--border-color);
+}
+.cart-sidebar.open { right: 0; }
+.cart-header, .cart-footer { padding: 20px; background: var(--bg-main); border-bottom: 1px solid var(--border-color); }
+.cart-header { display: flex; justify-content: space-between; align-items: center; }
+.cart-items { flex-grow: 1; overflow-y: auto; padding: 20px; }
+.cart-item { display: flex; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); }
+.cart-item img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; margin-left: 15px; }
+.remove-btn { background: #fee2e2; color: #ef4444; width: 34px; height: 34px; padding: 0; border-radius: 8px; }
+.remove-btn:hover { background: #ef4444; color: white; }
+
+.cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1004 !important; display: none; opacity: 0; transition: opacity var(--transition-main); }
+.cart-overlay.open { display: block; opacity: 1; }
+
+/* النافذة المنبثقة (Modal) */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px); z-index: 2000; display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity var(--transition-main);
+}
+.modal-overlay.active { display: flex; opacity: 1; }
+.modal-content {
+    background: var(--bg-card); padding: 30px; border-radius: 20px; width: 90%; max-width: 750px;
+    position: relative; transform: scale(0.9); transition: transform var(--transition-main); border: 1px solid var(--border-color);
+}
+.modal-overlay.active .modal-content { transform: scale(1); }
+.close-modal { position: absolute; top: 15px; right: 20px; cursor: pointer; color: var(--text-muted); display: flex; padding: 5px; background: var(--bg-main); border-radius: 50%; }
+.modal-flex { display: flex; gap: 30px; align-items: center; }
+.modal-flex img { width: 45%; border-radius: 12px; object-fit: cover; }
+
+/* الإشعارات اللحظية (Toasts) */
+.toast-container { position: fixed; bottom: 20px; left: 20px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; }
+.toast { background: #10b981; color: white; padding: 14px 24px; border-radius: 10px; font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.1); animation: slideIn 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+/* الأنيميشن الافتراضي الصاعد */
+@keyframes slideIn { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* =========================================
+   11. Full Responsive Testing (التجاوب الشامل لكل الشاشات)
+========================================= */
+@media (max-width: 1024px) {
+    .main-navbar { padding: 0 20px; }
+    .nav-right-side, .nav-left-side { gap: 16px; }
+    .hero-content h2 { font-size: 2.8rem; }
+}
+
+@media (max-width: 768px) {
+    .main-navbar { height: auto; flex-direction: column; padding: 16px 20px; gap: 14px; }
+    .nav-center-side { width: 100%; order: 3; margin: 0; }
+    .search-box { max-width: 100%; }
+    .nav-right-side { width: 100%; justify-content: space-between; }
+    
+    section, main { padding: 60px 0; }
+    .hero-content h2 { font-size: 2.25rem; }
+    .hero-content p { font-size: 1.05rem; }
+    .products-grid, .categories-grid, .testimonials-grid { grid-template-columns: 1fr; gap: 24px; }
+    .category-card { width: 100%; }
+    .modal-flex { flex-direction: column; text-align: center; }
+    .modal-flex img { width: 100%; }
+    .cart-sidebar { width: 100%; right: -100%; }
+}
